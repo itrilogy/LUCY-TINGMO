@@ -1,0 +1,60 @@
+/* Tingmo (听默) · LUXI Lab palette */
+
+:root {
+  /* Palette source of truth. Each themed color is defined once as a
+     light/dark pair; the active tokens below and the `data-theme` overrides
+     in App.css reference these, so a hex value lives in exactly one place. */
+
+  /* Light — 源启白 / 深林字 */
+  --light-color-text: #0f1a16;
+  --light-color-background: #f5f7fa;
+  --light-color-logo-primary: #0d5e42;
+  --light-color-logo-stroke: #083f2d;
+  --light-color-surface: #ffffff;
+  --light-color-surface-2: #eef2ef;
+  --light-color-border: #d5ded9;
+  --light-color-text-muted: #5c6b64;
+
+  /* Dark — 深林底 */
+  --dark-color-text: #e8f0ec;
+  --dark-color-background: #121a17;
+  --dark-color-logo-primary: #2a9b6f;
+  --dark-color-logo-stroke: #a8f0d4;
+  --dark-color-surface: #1a2420;
+  --dark-color-surface-2: #222e29;
+  --dark-color-border: #2f3d37;
+  --dark-color-text-muted: #9aaba3;
+
+  /* Tokens that do not change between light and dark */
+  --color-background-ui: #0d5e42;
+  --color-text-stroke: #f5f7fa;
+  --color-mid-gray: #6b7a73;
+  --color-accent-spark: #00d2ff;
+  --color-recording: #c23b3b;
+  --color-success: #2f7d4a;
+  --color-warning: #b7811a;
+
+  /* Active palette — defaults to light, follows the OS via the media query
+     below, or is forced by `data-theme` (see App.css). */
+  --color-text: var(--light-color-text);
+  --color-background: var(--light-color-background);
+  --color-logo-primary: var(--light-color-logo-primary);
+  --color-logo-stroke: var(--light-color-logo-stroke);
+  --color-surface: var(--light-color-surface);
+  --color-surface-2: var(--light-color-surface-2);
+  --color-border: var(--light-color-border);
+  --color-text-muted: var(--light-color-text-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text: var(--dark-color-text);
+    --color-background: var(--dark-color-background);
+    --color-logo-primary: var(--dark-color-logo-primary);
+    --color-logo-stroke: var(--dark-color-logo-stroke);
+    --color-surface: var(--dark-color-surface);
+    --color-surface-2: var(--dark-color-surface-2);
+    --color-border: var(--dark-color-border);
+    --color-text-muted: var(--dark-color-text-muted);
+  }
+}

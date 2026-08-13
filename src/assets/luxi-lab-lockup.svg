@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 96" fill="none">
+  <g transform="scale(0.375)">
+    <rect width="256" height="256" fill="#0D5E42"/>
+    <g fill="#F5F7FA">
+      <path d="M0 0 H96 L128 128 L72 128 L0 48 Z"/>
+      <path d="M256 0 H160 L128 128 L184 128 L256 48 Z"/>
+      <path d="M96 128 H160 V256 H96 Z"/>
+      <path d="M96 188 H256 V256 H96 Z"/>
+    </g>
+    <circle cx="128" cy="128" r="36" fill="#0D5E42"/>
+    <path fill="#00D2FF" d="M128 96 L160 128 L128 160 L96 128 Z"/>
+  </g>
+  <text x="108" y="42" fill="#0D5E42" font-family="system-ui,-apple-system,PingFang SC,sans-serif" font-size="20" font-weight="600">鹿溪联合创新实验室</text>
+  <text x="108" y="68" fill="#0D5E42" opacity="0.5" font-family="system-ui,-apple-system,sans-serif" font-size="12" letter-spacing="0.16em">LUXI LAB · 林深见鹿，源启清溪</text>
+</svg>

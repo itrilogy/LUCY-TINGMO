@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" fill="none">
+  <!--
+    Dock / app icon — same mark as in-app TingmoMark (sidebar).
+    Transparent outside a soft rounded square so macOS Dock shows round corners
+    without a second “plate” behind the glyph.
+  -->
+  <!-- Soft squircle plate (LUXI green); corners stay transparent beyond rx -->
+  <rect
+    x="48"
+    y="48"
+    width="928"
+    height="928"
+    rx="236"
+    ry="236"
+    fill="#0D5E42"
+  />
+  <!-- Gentle highlight for depth (still flat enough for icons) -->
+  <rect
+    x="48"
+    y="48"
+    width="928"
+    height="928"
+    rx="236"
+    ry="236"
+    fill="url(#plateShine)"
+  />
+  <defs>
+    <linearGradient id="plateShine" x1="200" y1="80" x2="820" y2="960" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="0.45" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.12"/>
+    </linearGradient>
+  </defs>
+
+  <!-- In-app mark geometry (viewBox 48×48) scaled into the plate with padding -->
+  <g transform="translate(128 128) scale(16)">
+    <!-- Sound arcs -->
+    <path
+      d="M14 16.5c4.2-4.8 15.8-4.8 20 0"
+      stroke="#ffffff"
+      stroke-width="2.4"
+      stroke-linecap="round"
+      fill="none"
+      opacity="0.95"
+    />
+    <path
+      d="M16.5 20.5c3.2-3.4 11.8-3.4 15 0"
+      stroke="#ffffff"
+      stroke-width="2.2"
+      stroke-linecap="round"
+      fill="none"
+      opacity="0.9"
+    />
+    <path
+      d="M19.5 24c2.2-2.2 6.8-2.2 9 0"
+      stroke="#ffffff"
+      stroke-width="2"
+      stroke-linecap="round"
+      fill="none"
+      opacity="0.85"
+    />
+    <!-- Stream -->
+    <path
+      d="M26 15c3 5-5 8-1.5 13s7 6.5 4 13"
+      stroke="#ffffff"
+      stroke-width="3.2"
+      stroke-linecap="round"
+      fill="none"
+      opacity="0.95"
+    />
+    <!-- Origin spark -->
+    <circle cx="15.5" cy="31" r="3.2" fill="#00D2FF"/>
+    <circle cx="15.5" cy="31" r="1.5" fill="#ffffff" opacity="0.9"/>
+  </g>
+</svg>

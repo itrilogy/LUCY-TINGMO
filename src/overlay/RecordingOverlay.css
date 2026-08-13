@@ -1,0 +1,711 @@
+@import "../styles/theme.css";
+
+:root {
+  --s-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Near-opaque app surface (theme.css --color-background at 98%). Auto-flips
+     light/dark with --color-background, so no dark-mode override is needed. */
+  --s-surface: color-mix(in srgb, var(--color-background) 98%, transparent);
+  /* Accent = LUXI / Tingmo brand green via --color-logo-primary. */
+  --s-accent: var(--color-logo-primary);
+  --s-accent-soft: color-mix(
+    in srgb,
+    var(--color-background-ui) 16%,
+    transparent
+  );
+  /* Neutrals. Hairlines reuse the app's mid-gray at low opacity — same vocabulary
+     as the app's border-mid-gray/* utilities. muted/faint are overlay-specific
+     secondary/tertiary text grays (no theme equivalent). */
+  --s-muted: #6e6e6e;
+  --s-faint: #9a9a9a;
+  --s-border: color-mix(in srgb, var(--color-mid-gray) 22%, transparent);
+  --s-hair: color-mix(in srgb, var(--color-mid-gray) 12%, transparent);
+
+  /* Card geometry — single source of truth for the visible overlay sizes. The
+     native overlay window (overlay.rs) uses OVERLAY_PANEL_* for streaming+result
+     so live "展开" and the result panel share one footprint (--ov-result-w /
+     --ov-result-cap-max-h). Keep overlay.rs in sync when these change. */
+  --ov-rest-w: 172px; /* resting compact pill (minimal, recording) -- roomy enough
+                         for the English working label before the grow starts */
+  --ov-pill-w: 184px; /* base width / Live pill before it opens or collapses */
+  --ov-work-w: 216px; /* working pill (transcribing / polishing) -- wide enough to
+                         center longer labels; shared by Live (collapsed) + minimal */
+  --ov-open-w: 392px; /* Live panel with current-segment line (not fully expanded) */
+  /* Shared by result panel and live "展开" so both popups feel the same size. */
+  --ov-result-w: 400px;
+  --ov-base-h: 40px; /* control-row height (.sbase) */
+  --ov-cap-max-h: 64px; /* max height of the compact live-text region */
+  --ov-result-cap-max-h: 140px; /* text area: result + live fully expanded */
+  /* Expand/collapse morph timing (width + text region height). */
+  --ov-expand-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ov-expand-ms: 420ms;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Accent soft uses lighter brand green in dark for contrast. */
+    --s-accent-soft: color-mix(
+      in srgb,
+      var(--color-logo-primary) 20%,
+      transparent
+    );
+    --s-muted: #a3a09a;
+    --s-faint: #6f6c66;
+    /* Hairlines flip to the near-white text token for contrast on dark. */
+    --s-border: color-mix(in srgb, var(--color-text) 12%, transparent);
+    --s-hair: color-mix(in srgb, var(--color-text) 8%, transparent);
+  }
+}
+
+/* ============================================================
+   Unified overlay stage — one fixed, transparent container shared by the compact
+   pill and the Live panel (both render the same `.scard` base). The card is
+   anchored flush to the screen-edge side (bottom by default, top when placed up
+   top) and centered horizontally, so the visible card sits exactly
+   OVERLAY_*_OFFSET from the screen edge regardless of window height — only the
+   offsets in overlay.rs move it. Pops scale from that edge, so the card is never
+   drawn past it (matters for the 4px top offset on Windows/Linux).
+   ============================================================ */
+.ov-stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center; /* horizontal centering, kept for both forms */
+  align-items: flex-end; /* bottom placement: flush to the bottom edge */
+  font-family: var(--s-font);
+}
+.ov-stage.top {
+  align-items: flex-start; /* top placement: flush to the top edge */
+}
+
+/* Compact pill: fade the whole container in/out (the pill itself never pops or
+   morphs). */
+.ov-fade {
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+.ov-fade.show {
+  opacity: 1;
+}
+
+/* Top placement, Live panel: stack the control pill above the text region so the
+   card grows downward from its top edge (oldest line under the pill, newest at
+   the bottom) — mirroring the bottom overlay's upward flow. The compact pill has
+   no flowing text, so this only affects the Live panel. The text region keeps the
+   same fade + scroll-pin; older lines dissolve up under the pill. */
+.ov-stage.top .scard {
+  /* column-reverse stacks the control pill above the text region. */
+  flex-direction: column-reverse;
+  transform-origin: top center;
+}
+.ov-stage.top .stext-cap {
+  /* Mirror of the bottom overlay (top: 12 / bottom: 0): the first line sits flush
+     under the pill and the breathing room moves below the text. The top fade is
+     off at rest — at zero top padding it would dim the resting first line — and
+     switches on (below) only once text overflows. */
+  padding-top: 0;
+  padding-bottom: 12px;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+/* Once live text overflows, fade older lines up under the pill, matching the
+   bottom overlay's top fade. Gated on `.overflowing` so a short resting line
+   (sitting at the very top) is never dimmed. */
+.ov-stage.top .stext-cap.overflowing {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 18px);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 18px);
+}
+.ov-stage.top .stext-cap p {
+  /* Top-anchor short text just under the pill; on overflow the cap still pins to
+     the bottom (newest visible) and older lines fade off the top, same as bottom. */
+  margin: 0;
+}
+
+/* Shared base card. Flat: theme surface + hairline border, no shadow or blur. */
+.scard {
+  width: var(--ov-pill-w);
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: none; /* hold our own width; never let the stage flex shrink the card */
+  transform-origin: bottom center;
+  background: var(--s-surface);
+  border: 1px solid var(--s-border);
+  /* Flat: no drop shadow, no backdrop blur/saturate (was a glassy gradient look). */
+  /* pop-in plays on mount; morph (width/radius) is a transition */
+  animation: scard-pop 460ms var(--ov-expand-ease);
+  transition:
+    width var(--ov-expand-ms) var(--ov-expand-ease),
+    border-radius var(--ov-expand-ms) var(--ov-expand-ease);
+  will-change: transform, width, opacity;
+}
+@keyframes scard-pop {
+  from {
+    opacity: 0;
+    /* Scale from the anchored edge (transform-origin) — never translate past it. */
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.scard.leaving {
+  opacity: 0;
+  transform: scale(0.96);
+  transition:
+    opacity 240ms ease,
+    transform 300ms ease;
+}
+.scard.open {
+  width: var(--ov-open-w);
+  border-radius: 16px;
+}
+/*
+ * Expanded live + result: fixed outer footprint. Text area grows; control /
+ * action bar is always pinned to the card bottom (margin-top: auto) so short
+ * transcripts never pull the chrome upward or stack under the last line.
+ */
+.scard.open.result,
+.scard.open.live-expanded {
+  width: var(--ov-result-w);
+  border-radius: 16px;
+  min-height: calc(
+    var(--ov-result-cap-max-h) + var(--ov-base-h) + 24px
+  );
+  /* Dialog layout: text grows, footer always at bottom — even if stage is "top". */
+  flex-direction: column !important;
+  justify-content: flex-start;
+}
+.scard.open.result .stext,
+.scard.open.live-expanded .stext {
+  flex: 1 1 auto;
+  min-height: var(--ov-result-cap-max-h);
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.scard.open.result .stext-clip,
+.scard.open.live-expanded .stext-clip {
+  height: 100%;
+  min-height: var(--ov-result-cap-max-h);
+}
+.scard.open.result .result-bar,
+.scard.open.live-expanded .live-bar {
+  margin-top: auto;
+  flex: none;
+}
+.scard.working {
+  width: var(--ov-work-w);
+  border-radius: 18px;
+}
+
+/* Final transcript / live full: same scroll region height */
+.stext-cap.result-cap {
+  max-height: var(--ov-result-cap-max-h);
+  min-height: var(--ov-result-cap-max-h);
+  height: 100%;
+  box-sizing: border-box;
+}
+/* Result / expanded: top-align copy (never bottom-stick into the footer). */
+.scard.open.result .stext-cap p,
+.scard.open.live-expanded .stext-cap p {
+  margin: 0;
+}
+/* Empty / error: center the message in the fixed text frame */
+.scard.result-empty .stext-cap.result-cap,
+.scard.result-error .stext-cap.result-cap {
+  justify-content: center;
+}
+.scard.result-empty .stext-cap.result-cap p,
+.scard.result-error .stext-cap.result-cap p {
+  margin: 0;
+  text-align: center;
+}
+/* Result action footer — separate from text; never overlaps lines. */
+.result-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: calc(var(--ov-base-h) + 4px);
+  padding: 10px 12px 12px;
+  flex: none;
+  border-top: 1px solid var(--s-hair);
+  background: var(--s-surface);
+  position: relative;
+  z-index: 2;
+}
+.result-bar-dismiss-only {
+  justify-content: center;
+}
+.result-dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  line-height: 1;
+  min-height: 30px;
+  padding: 0 16px;
+}
+.result-dismiss-icon {
+  width: 12px;
+  height: 12px;
+  flex: none;
+  display: block;
+}
+.result-dismiss span {
+  line-height: 1;
+  display: inline-block;
+}
+/* Legacy class kept if referenced elsewhere */
+.sbase-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 12px 10px;
+  min-height: var(--ov-base-h);
+}
+/* Fixed control chrome — expand only grows the card/text frame, not buttons. */
+.sbtn {
+  appearance: none;
+  border: 1px solid var(--s-border);
+  background: var(--s-accent-soft);
+  color: var(--color-text, inherit);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+  line-height: 1.2;
+  flex: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.sbtn:hover {
+  filter: brightness(1.05);
+}
+.sbtn.primary {
+  background: var(--s-accent);
+  border-color: transparent;
+  color: #fff;
+}
+
+/* Compact form: two fixed widths so the recording→working change is an animatable
+   width transition (intrinsic max-content can't be transitioned, and every label
+   is short enough to fit the resting pill, so content-sizing produced no visible
+   grow). The resting pill hugs the waveform; the working pill is roomy enough to
+   center the longest label — the .swork-label ellipsis is only a safety net past it. */
+.scard.compact {
+  animation: none;
+  width: var(--ov-rest-w);
+  /* Idle pill: single control row only — keep content vertically centered. */
+  justify-content: center;
+}
+.scard.compact.cworking {
+  width: var(--ov-work-w);
+}
+/* Pre-speech streaming pill (no .open): same vertical centering as compact. */
+.scard:not(.open):not(.working):not(.live-expanded) .live-bar {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* text region — auto-height open via grid-rows trick; region fades as a whole */
+.stext {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--ov-expand-ms) var(--ov-expand-ease),
+    opacity 260ms ease;
+}
+.scard.open .stext {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.stext-clip {
+  overflow: hidden;
+  min-height: 0;
+}
+/* Compact current-segment line → full transcript (same height as result panel). */
+.stext-cap.live-current {
+  max-height: var(--ov-cap-max-h);
+  overflow: hidden;
+}
+.stext-cap.live-full {
+  max-height: var(--ov-result-cap-max-h);
+  min-height: var(--ov-result-cap-max-h);
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  box-sizing: border-box;
+}
+.stext-cap.live-full::-webkit-scrollbar {
+  width: 6px;
+  display: block;
+}
+.stext-cap .pre-wrap,
+.stext-cap p.pre-wrap,
+.stext-cap.result-cap p,
+.stext-cap .committed {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.stext-cap .current-only {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/*
+ * Live control bar
+ *  idle:   [dot] [wave] [cancel]  — equal side columns, centered wave (pre-speech pill)
+ *  active: [expand?] [status] [cancel] — cancel flush right after speech / while working
+ */
+.live-bar {
+  display: grid;
+  grid-template-columns: minmax(28px, 1fr) auto minmax(28px, 1fr);
+  align-items: center;
+  height: var(--ov-base-h);
+  min-height: var(--ov-base-h);
+  padding: 0 8px;
+  box-sizing: border-box;
+  flex: none;
+  width: 100%;
+}
+/* Open / expanded live: footer chrome (pinned via .scard rules above). */
+.scard.open .live-bar,
+.scard.live-expanded .live-bar {
+  height: auto;
+  min-height: calc(var(--ov-base-h) + 4px);
+  padding: 8px 10px 10px;
+  border-top: 1px solid var(--s-hair);
+  background: var(--s-surface);
+  position: relative;
+  z-index: 2;
+}
+.live-side {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+.live-side-l {
+  justify-self: start;
+  justify-content: flex-start;
+  padding-left: 2px;
+}
+.live-side-r {
+  justify-self: end;
+  justify-content: flex-end;
+  padding-right: 0;
+}
+.live-bar .sbtn {
+  flex: none;
+}
+.live-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  justify-self: center;
+}
+.live-center .sdot,
+.live-center .sspinner {
+  flex: none;
+}
+.live-center .swave,
+.live-bar-idle .swave {
+  padding-right: 0;
+}
+.live-center .swork-label {
+  padding: 0;
+  text-align: center;
+}
+.live-bar .sx {
+  flex: none;
+  margin: 0;
+}
+/* Idle pill: side columns equal; cancel sits in the right rail near the edge. */
+.live-bar-idle {
+  grid-template-columns: 28px 1fr 28px;
+}
+.live-bar-idle .live-center {
+  width: 100%;
+}
+.live-bar-idle .live-side-l {
+  width: 28px;
+  justify-content: center;
+  padding-left: 0;
+}
+.live-bar-idle .live-side-r {
+  width: 28px;
+  justify-content: center;
+  padding-right: 0;
+}
+/* Active: left grows for expand; empty left still reserves cancel-width for balance. */
+.live-bar-active {
+  grid-template-columns: minmax(28px, auto) 1fr 28px;
+  gap: 8px;
+}
+.live-bar-active .live-side-r {
+  width: 28px;
+  justify-content: center;
+}
+.live-timer {
+  opacity: 1;
+  transition: none;
+}
+.sbase-grow {
+  flex: 1;
+  min-width: 0;
+}
+.stext-cap {
+  max-height: var(--ov-cap-max-h);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  padding-top: 12px;
+  padding-bottom: 0px;
+  padding-left: 14px;
+  padding-right: 14px;
+  font-size: 15px;
+  /* Animate live compact ↔ expanded text frame (matches result height). */
+  transition: max-height var(--ov-expand-ms) var(--ov-expand-ease);
+  font-style: italic;
+  line-height: 1.35;
+  letter-spacing: -0.003em;
+  color: color-mix(in srgb, var(--color-text) 90%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 18px);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 18px);
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* legacy Edge */
+}
+/* Hide the scrollbar (WebKit/Chromium) — scroll-back is signalled by the fade. */
+.stext-cap::-webkit-scrollbar {
+  display: none;
+}
+.stext-cap p {
+  /* Default top-align. (Live compact current line stays short; expanded/result
+     override is already margin:0. Bottom-anchoring caused footer overlap.) */
+  margin: 0;
+}
+/* Live compact only: pin short current line to bottom of the small cap. */
+.stext-cap.live-current p {
+  margin: auto 0 0;
+}
+.stext-cap .tentative {
+  color: inherit;
+}
+.scaret {
+  display: inline-block;
+  width: 2px;
+  height: 1.02em;
+  translate: 0 3px;
+  margin-left: 1px;
+  background: var(--s-accent);
+  border-radius: 2px;
+  animation: scaret-blink 1.05s steps(1) infinite;
+}
+@keyframes scaret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* base row — dot (left) | waveform (center) | timer + cancel (right).
+   Same structure for pill & panel; the dot stays anchored left in both. */
+.sbase {
+  height: var(--ov-base-h);
+  padding: 0 8px;
+  display: grid;
+  /* Equal side rails so waveform stays optically centered in the idle pill. */
+  grid-template-columns: 28px 1fr 28px;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+.sbase-l {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  width: 28px;
+  padding-left: 0;
+}
+.sbase-r {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  gap: 6px;
+  width: 28px;
+}
+/* Working label needs wider rails so spinner / cancel don't collide with text. */
+.sbase:has(.swork-label) {
+  grid-template-columns: 28px 1fr 28px;
+}
+.sbase .swave {
+  justify-self: center;
+  padding-right: 0;
+}
+.sdot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--s-accent);
+  flex: none;
+  animation: sdot-pulse 1.9s infinite;
+}
+@keyframes sdot-pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--s-accent-soft);
+  }
+  70% {
+    box-shadow: 0 0 0 7px transparent;
+  }
+}
+.stimer {
+  font-size: 12px;
+  color: var(--s-faint);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 240ms ease 80ms;
+}
+.scard.open .stimer {
+  opacity: 1;
+}
+
+/* Waveform — simple reactive bars, themed; heights set inline from mic levels. */
+.swave {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding-right: 8px;
+  height: 18px;
+  flex: none;
+}
+.swave i {
+  width: 4px;
+  min-height: 3px;
+  max-height: 18px;
+  border-radius: 2px;
+  background: var(--s-accent);
+  transition: height 80ms linear;
+}
+.sx {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex: none;
+  padding: 0;
+  border: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--s-muted);
+  background: var(--s-hair);
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    transform 100ms ease;
+}
+.sx svg {
+  width: 9px;
+  height: 9px;
+  display: block;
+}
+.sx:hover {
+  background: var(--s-accent-soft);
+  color: var(--color-text);
+  transform: scale(1.05);
+}
+.sx:active {
+  transform: scale(0.95);
+}
+
+/* working state (transcribing / polishing) — spinner + label */
+.sspinner {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid var(--s-hair);
+  border-top-color: var(--s-accent);
+  animation: sspin 0.7s linear infinite;
+  flex: none;
+}
+@keyframes sspin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.swork-label {
+  font-size: 12px;
+  color: var(--s-muted);
+  white-space: nowrap;
+  padding: 0 8px; /* breathing room from the spinner / cancel when content-sized */
+  /* Safety net: ellipsize rather than clip if a label exceeds the max pill width. */
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Empty / error result states */
+.committed.muted {
+  color: var(--s-muted);
+}
+.scard.result-empty .committed,
+.scard.result-error .committed {
+  color: var(--s-muted);
+  font-style: normal;
+  text-align: center;
+}
+.scard.result-error .committed {
+  color: color-mix(in srgb, #c44 70%, var(--s-muted));
+}
+
+/* Raw vs corrected compare */
+.sview-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 6px 8px 0;
+}
+.sview-tab {
+  border: 0;
+  background: transparent;
+  color: var(--s-muted);
+  font: inherit;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.sview-tab.active {
+  background: var(--s-accent-soft);
+  color: var(--s-accent);
+}
+.scompare {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.scompare-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--s-faint);
+  margin-bottom: 2px;
+}

@@ -1,0 +1,114 @@
+# Extracted from handy.log on 2026-07-29
+# source: /Users/kwangwah/Library/Logs/com.pais.handy/handy.log
+
+152|[2026-07-28][16:48:54][handy_app_lib::managers::transcription][INFO] Loaded whisper model 'handy-computer/Qwen3-ASR-0.6B-gguf/Qwen3-ASR-0.6B-Q8_0.gguf' (requested Auto, gpu_device 0, bound backend 'MTL0', supports_streaming=false, supports_translate=false, supports_language_detect=true)
+225|[2026-07-28][16:51:00][handy_app_lib::managers::transcription][INFO] Loaded whisper model 'handy-computer/SenseVoiceSmall-gguf/SenseVoiceSmall-Q8_0.gguf' (requested Auto, gpu_device 0, bound backend 'MTL0', supports_streaming=false, supports_translate=false, supports_language_detect=true)
+252|[2026-07-28][16:54:41][handy_app_lib::managers::audio][DEBUG] Recording started for binding transcribe
+253|[2026-07-28][16:54:41][handy_app_lib::actions][DEBUG] Recording started in 167.331209ms
+265|[2026-07-28][16:54:41][handy_app_lib::actions][DEBUG] Starting async transcription task for binding: transcribe
+267|[2026-07-28][16:54:41][handy_app_lib::actions][DEBUG] Recording stopped and samples retrieved in 38.709875ms, sample count: 0
+287|[2026-07-28][16:55:03][handy_app_lib::managers::audio][DEBUG] Recording started for binding transcribe
+288|[2026-07-28][16:55:03][handy_app_lib::actions][DEBUG] Recording started in 93.369042ms
+304|[2026-07-28][16:55:07][handy_app_lib::actions][DEBUG] Starting async transcription task for binding: transcribe
+306|[2026-07-28][16:55:07][handy_app_lib::actions][DEBUG] Recording stopped and samples retrieved in 33.332625ms, sample count: 32640
+307|[2026-07-28][16:55:07][handy_app_lib::managers::transcription][DEBUG] Audio vector length: 32640
+345|[2026-07-28][16:55:07][handy_app_lib::managers::transcription][INFO] Transcription completed in 0.42s for 2.04s of audio (4.83x real-time)
+346|[2026-07-28][16:55:07][handy_app_lib::managers::transcription][INFO] Transcription result: 介绍一下你自己
+347|[2026-07-28][16:55:07][handy_app_lib::actions][DEBUG] Transcription completed in 422.799917ms: '介绍一下你自己'
+349|[2026-07-28][16:55:07][handy_app_lib::actions][DEBUG] OpenCC translation completed. Input length: 21, Output length: 21
+350|[2026-07-28][16:55:07][handy_app_lib::managers::history][DEBUG] Saved history entry with id 1
+381|[2026-07-28][16:56:50][handy_app_lib::managers::audio][DEBUG] Recording started for binding transcribe
+382|[2026-07-28][16:56:50][handy_app_lib::actions][DEBUG] Recording started in 91.018542ms
+414|[2026-07-28][16:57:15][handy_app_lib::managers::audio][DEBUG] Recording started for binding transcribe
+415|[2026-07-28][16:57:15][handy_app_lib::actions][DEBUG] Recording started in 88.716916ms
+432|[2026-07-28][16:57:22][handy_app_lib::actions][DEBUG] Starting async transcription task for binding: transcribe
+434|[2026-07-28][16:57:22][handy_app_lib::actions][DEBUG] Recording stopped and samples retrieved in 32.418959ms, sample count: 99360
+435|[2026-07-28][16:57:22][handy_app_lib::managers::transcription][DEBUG] Audio vector length: 99360
+442|[2026-07-28][16:57:22][handy_app_lib::managers::transcription][INFO] Transcription completed in 0.16s for 6.21s of audio (39.93x real-time)
+443|[2026-07-28][16:57:22][handy_app_lib::managers::transcription][INFO] Transcription result: 这是一次语音测试这是一次语音测试
+444|[2026-07-28][16:57:22][handy_app_lib::actions][DEBUG] Transcription completed in 155.81675ms: '这是一次语音测试这是一次语音测试'
+446|[2026-07-28][16:57:22][handy_app_lib::actions][DEBUG] OpenCC translation completed. Input length: 48, Output length: 48
+447|[2026-07-28][16:57:22][handy_app_lib::managers::history][DEBUG] Saved history entry with id 2
+494|[2026-07-28][17:02:37][handy_app_lib::managers::audio][DEBUG] Recording started for binding transcribe
+495|[2026-07-28][17:02:37][handy_app_lib::actions][DEBUG] Recording started in 89.787041ms
+502|[2026-07-28][17:02:37][handy_app_lib::managers::transcription][INFO] Loaded whisper model 'handy-computer/SenseVoiceSmall-gguf/SenseVoiceSmall-Q8_0.gguf' (requested Auto, gpu_device 0, bound backend 'MTL0', supports_streaming=false, supports_translate=false, supports_language_detect=true)
+521|[2026-07-28][17:02:55][handy_app_lib::actions][DEBUG] Starting async transcription task for binding: transcribe
+523|[2026-07-28][17:02:55][handy_app_lib::actions][DEBUG] Recording stopped and samples retrieved in 33.081958ms, sample count: 138720
+524|[2026-07-28][17:02:55][handy_app_lib::managers::transcription][DEBUG] Audio vector length: 138720
+528|[2026-07-28][17:02:55][handy_app_lib::managers::transcription][INFO] Transcription completed in 0.14s for 8.67s of audio (59.92x real-time)
+529|[2026-07-28][17:02:55][handy_app_lib::managers::transcription][INFO] Transcription result: 这是一次语音测试这是一次语音的测试
+530|[2026-07-28][17:02:55][handy_app_lib::actions][DEBUG] Transcription completed in 144.988292ms: '这是一次语音测试这是一次语音的测试'
+532|[2026-07-28][17:02:55][handy_app_lib::actions][DEBUG] OpenCC translation completed. Input length: 51, Output length: 51
+533|[2026-07-28][17:02:55][handy_app_lib::managers::history][DEBUG] Saved history entry with id 3
+571|[2026-07-28][17:03:39][handy_app_lib::managers::transcription][DEBUG] Audio vector length: 138720
+574|[2026-07-28][17:03:39][handy_app_lib::managers::transcription][INFO] Transcription completed in 0.16s for 8.67s of audio (55.16x real-time)
+575|[2026-07-28][17:03:39][handy_app_lib::managers::transcription][INFO] Transcription result: 这是一次语音测试这是一次语音的测试
+577|[2026-07-28][17:03:39][handy_app_lib::actions][DEBUG] OpenCC translation completed. Input length: 51, Output length: 51
+579|[2026-07-28][17:03:43][handy_app_lib::managers::transcription][DEBUG] Audio vector length: 138720
+582|[2026-07-28][17:03:43][handy_app_lib::managers::transcription][INFO] Transcription completed in 0.16s for 8.67s of audio (53.91x real-time)
+583|[2026-07-28][17:03:43][handy_app_lib::managers::transcription][INFO] Transcription result: 这是一次语音测试这是一次语音的测试
+585|[2026-07-28][17:03:43][handy_app_lib::actions][DEBUG] OpenCC translation completed. Input length: 51, Output length: 51
+598|[2026-07-28][17:05:32][handy_app_lib::managers::transcription][INFO] Loaded whisper model 'handy-computer/Qwen3-ASR-0.6B-gguf/Qwen3-ASR-0.6B-Q8_0.gguf' (requested Auto, gpu_device 0, bound backend 'MTL0', supports_streaming=false, supports_translate=false, supports_language_detect=true)
+600|[2026-07-28][17:05:36][handy_app_lib::managers::transcription][DEBUG] Audio vector length: 138720
+645|[2026-07-28][17:05:37][handy_app_lib::managers::transcription][INFO] Transcription completed in 0.67s for 8.67s of audio (12.85x real-time)
+646|[2026-07-28][17:05:37][handy_app_lib::managers::transcription][INFO] Transcription result: 测试一次语音测试。测试一次语音的测试。
+648|[2026-07-28][17:05:37][handy_app_lib::actions][DEBUG] OpenCC translation completed. Input length: 57, Output length: 57
+650|[2026-07-28][17:05:38][handy_app_lib::managers::transcription][DEBUG] Audio vector length: 138720
+653|[2026-07-28][17:05:39][handy_app_lib::managers::transcription][INFO] Transcription completed in 0.31s for 8.67s of audio (27.67x real-time)
+654|[2026-07-28][17:05:39][handy_app_lib::managers::transcription][INFO] Transcription result: 测试一次语音测试。测试一次语音的测试。
+656|[2026-07-28][17:05:39][handy_app_lib::actions][DEBUG] OpenCC translation completed. Input length: 57, Output length: 57
+674|[2026-07-28][17:05:53][handy_app_lib::managers::audio][DEBUG] Recording started for binding transcribe
+675|[2026-07-28][17:05:53][handy_app_lib::actions][DEBUG] Recording started in 89.157208ms
+692|[2026-07-28][17:05:59][handy_app_lib::actions][DEBUG] Starting async transcription task for binding: transcribe
+695|[2026-07-28][17:05:59][handy_app_lib::actions][DEBUG] Recording stopped and samples retrieved in 34.54675ms, sample count: 90720
+696|[2026-07-28][17:05:59][handy_app_lib::managers::transcription][DEBUG] Audio vector length: 90720
+704|[2026-07-28][17:05:59][handy_app_lib::managers::transcription][INFO] Transcription completed in 0.34s for 5.67s of audio (16.90x real-time)
+705|[2026-07-28][17:05:59][handy_app_lib::managers::transcription][INFO] Transcription result: 这还是一次语音的测试，这依然是一次语音的测试。
+706|[2026-07-28][17:05:59][handy_app_lib::actions][DEBUG] Transcription completed in 335.69125ms: '这还是一次语音的测试，这依然是一次语音的测试。'
+708|[2026-07-28][17:05:59][handy_app_lib::actions][DEBUG] OpenCC translation completed. Input length: 69, Output length: 69
+709|[2026-07-28][17:05:59][handy_app_lib::managers::history][DEBUG] Saved history entry with id 4
+741|[2026-07-28][17:07:37][handy_app_lib::managers::audio][DEBUG] Recording started for binding transcribe
+742|[2026-07-28][17:07:37][handy_app_lib::actions][DEBUG] Recording started in 91.274084ms
+759|[2026-07-28][17:07:40][handy_app_lib::actions][DEBUG] Starting async transcription task for binding: transcribe
+762|[2026-07-28][17:07:40][handy_app_lib::actions][DEBUG] Recording stopped and samples retrieved in 28.358958ms, sample count: 40800
+763|[2026-07-28][17:07:40][handy_app_lib::managers::transcription][DEBUG] Audio vector length: 40800
+773|[2026-07-28][17:07:40][handy_app_lib::managers::transcription][INFO] Transcription completed in 0.33s for 2.55s of audio (7.73x real-time)
+774|[2026-07-28][17:07:40][handy_app_lib::managers::transcription][INFO] Transcription result: 测试一次语音测试。
+775|[2026-07-28][17:07:40][handy_app_lib::actions][DEBUG] Transcription completed in 330.15125ms: '测试一次语音测试。'
+777|[2026-07-28][17:07:40][handy_app_lib::actions][DEBUG] OpenCC translation completed. Input length: 27, Output length: 27
+778|[2026-07-28][17:07:40][handy_app_lib::managers::history][DEBUG] Saved history entry with id 5
+872|[2026-07-29][00:33:48][handy_app_lib::managers::transcription][INFO] Loaded whisper model 'handy-computer/SenseVoiceSmall-gguf/SenseVoiceSmall-Q8_0.gguf' (requested Auto, gpu_device 0, bound backend 'MTL0', supports_streaming=false, supports_translate=false, supports_language_detect=true)
+891|[2026-07-29][00:33:58][handy_app_lib::managers::audio][DEBUG] Recording started for binding transcribe
+892|[2026-07-29][00:33:58][handy_app_lib::actions][DEBUG] Recording started in 224.796958ms
+909|[2026-07-29][00:56:00][handy_app_lib::actions][DEBUG] Starting async transcription task for binding: transcribe
+911|[2026-07-29][00:56:00][handy_app_lib::actions][DEBUG] Recording stopped and samples retrieved in 55.318833ms, sample count: 16873440
+912|[2026-07-29][00:56:00][handy_app_lib::managers::transcription][DEBUG] Audio vector length: 16873440
+915|[2026-07-29][00:56:00][transcribe_cpp][WARN] sensevoice run: audio is 1054.6 s, beyond the ~30 s window this model was trained on; accuracy may degrade and memory use grows quadratically. Split long audio into <=30 s segments (e.g. with VAD). See transcribe_capabilities.max_audio_ms.
+949|[2026-07-29][00:56:56][handy_app_lib::managers::transcription][INFO] Transcription completed in 56.02s for 1054.59s of audio (18.82x real-time)
+950|[2026-07-29][00:56:56][handy_app_lib::managers::transcription][INFO] Transcription result: 专门以强化标准引领保障作以经济升级促进经济标准发展为主题行了第十重要基础性制度对构建现代化产业体系建设全国统一大市场具有重要作用要把标准升级增加突出的位置加快构建适应行业标适应标量发展要求的标准体系更好发挥标准的引领保障作用那在今年的食物规划纲要里标准个也是的四十八处专部署了标准化的工作并且明确提出要强化国家标准引领推进标准更新升级实施新产业标准化工程这些设计的密出台充分放了一个强的信号那就是标准化在推进国家治理体系能现代化中发挥着不可替代的作用那对我们行业来说今年我们的全国烟草工作会提出要实施标准化专项行动标准化科技工作会度属性必须把标准摆在行业发展更家突出的位加推形成法律规政策文件技术标准衔接协同的良好格局... [truncated, total_line_len=2027]
+951|[2026-07-29][00:56:56][handy_app_lib::actions][DEBUG] Transcription completed in 56.028062166s: '专门以强化标准引领保障作以经济升级促进经济标准发展为主题行了第十重要基础性制度对构建现代化产业体系建设全国统一大市场具有重要作用要把标准升级增加突出的位置加快构建适应行业标适应标量发展要求的标准体系更好发挥标准的引领保障作用那在今年的食物规划纲要里标准个也是的四十八处专部署了标准化的工作并且明确提出要强化国家标准引领推进标准更新升级实施新产业标准化工程这些设计的密出台充分放了一个强的信号那就是标准化在推进国家治理体系能现代化中发挥着不可替代的作用那对我们行业来说今年我们的全国烟草工作会提出要实施标准化专项行动标准化科技工作会度属性必须把标准摆在行业发展更家突出的位加推形成法律规政策文件技术标准衔接协同的良好格局要建全体系加快优应发展要的标准体系形成以科技创新标准水平应用进产业升级的循环要抓好标供给标落那么不管是从国家战略层面而可以说是进入了一个新的阶段我们必须在行业标准化化工作的重要要性增把这里呢我我自己也总结技术支但是现在呢了这个基础支撑作用引领作用如新产新技术新业态的这个升级那对我们来们已培标多的标准体系标第二个转变呢我就就是从单一的规范体系化布局的转变我们通过科学的标准体系行业集优源配形成覆盖产业链科的标准体系体系这里这几年有几个典型的例子比如说物流物流公司他们组织对原来的物流标准体系做了修订然后并且根据这个修订之后的标准体系系统的修订了一批流的标准就引领我们行业物流的标准从原来传统的这种物流的模式模式就是数字化信息化制慧化的这种物流模式这个是近年来一个非常好的就是标准体系的实践那么另外就是在乡销料标准体系建设这块大家也都知道在的工应方式也发生了一些变化为支撑我们行业料主掌控呢我们有一些原来的标准可能也要发生一些变化所以就在前几天我们也刚刚发布了那个料标准体系构成与要求的标准此之外呢参照工信部和国标委的一些做法项目组还配套制定了一个料标准体系建设指南因以往发的标体系主要就是一些标准的明细表为主就是我们比如说在标准但是这个实际上用下来呢有下这个制定这个标准体系的建设指南对于这个标准体系建设的基本原则目标路建的内容这些进行了阐述那么就为后这个领域里一些指引那么面我们也是逐步的会实践在领域一个个指南的提供一些参考和指引第三个转变呢我是从国内际标准化的转变标的用语言也是国际标是试用的就可以后另一方面的优势基术标准出去国内外制度标准的是在制定了烟草领域的这个国际标准那么呢我在烟草领域工作五期本上们我现在烟领域标标逐标一点新烟草领域先地位同时呢我这业链的优势就是全球的电中另那我们这呢也是争取这个领域的这个同时我们这些领域也持的发力准化工作一是好烟草行业标准化专项行方的贯彻落实那么为了全面掌握当前行业标准化工作的验业路径新业路重了专研下研调研们行业都收到了一些近尾生那我们预计份形成个研调研容基础制定发烟草行业标准专项行体方案这个方案呢是零二的也是我们期落实业准工作各单位注们这个单位的实对好落实二加一步加强烟草行业目理我们都道标量准化工作的生命线发了一项目管理我们在培训过程上还但我这里也简单的一下主要是标准行周精理一是控制标制周前我们项目的研制周期呢是十二个个制周就项目审果说能按时审目请延过六个月这个是我们行业情况国标个研周过个划开始然后你的周期是十二个月月批结结要有有说国家这目周严的所行业督目按审项目也是提我们的一个标准供给效率第二规范名单位定标工实质单位个人有项目组征求意的时应定草单标征如果说实有目组批的时供说明那现在处和们标进行核强项目过程管理单目的施工作目的量管理另外标析对标研制周目对行业重点标准研加强第四呢是现在新的一个要求就是公平性竞的要这个主要落实统一大市场的这个要标一个制定国标的那另外咱们行业了一个行业的件这也定制定市场出产业发展招投标采营为规范资质标准法场营业标见应按行业规定竞那标编说明应该把这个竞的结作为单说明批这个是一项新增的一项要求吧第三是强化标落地命制定了标但应作用这里我还想说一点就是在我们行业不管是国家标准行业标准还是司标说他们在这个属性管理方但行一行业这个统一管的这个体制决定了所以说不管是国行司同等的这个研性所各单位工作加度标标实施的有些重标准的实应用态通过那我们部门规规制推束行但业些行业的标准一定程度上也是企业必执行的那么另外呢还有一种就是我在企业的行性规范文件引用这个标准定程度上是了这个标准的制力束力后呢感谢大家对我们科标准化工作的职培精次培训出新型力的所有的工作人员培训成大家都能大家行业标准化工作的草大家本培训班项部的教学联服务大家有问题大家在微信学电子培按课培束培大家大家要期允许发现严这后保障人好培训期放中十二点的下的上学第培训大家另外要接受在院内同期培过大家学本培训大家'
+953|[2026-07-29][00:56:57][handy_app_lib::actions][DEBUG] OpenCC translation completed. Input length: 5805, Output length: 5805
+954|[2026-07-29][00:56:57][handy_app_lib::managers::history][DEBUG] Saved history entry with id 6
+984|[2026-07-29][01:02:44][handy_app_lib::managers::transcription][INFO] Loaded whisper model 'handy-computer/Qwen3-ASR-0.6B-gguf/Qwen3-ASR-0.6B-Q8_0.gguf' (requested Auto, gpu_device 0, bound backend 'MTL0', supports_streaming=false, supports_translate=false, supports_language_detect=true)
+986|[2026-07-29][01:02:51][handy_app_lib::managers::transcription][DEBUG] Audio vector length: 16873440
+1051|[2026-07-29][01:03:44][handy_app_lib::managers::transcription][DEBUG] Audio vector length: 16873440
+1062|[2026-07-29][01:03:45][handy_app_lib::managers::transcription][INFO] Loaded whisper model 'handy-computer/Qwen3-ASR-0.6B-gguf/Qwen3-ASR-0.6B-Q8_0.gguf' (requested Auto, gpu_device 0, bound backend 'MTL0', supports_streaming=false, supports_translate=false, supports_language_detect=true)
+1138|[2026-07-29][01:04:23][handy_app_lib::managers::transcription][INFO] Loaded whisper model 'handy-computer/SenseVoiceSmall-gguf/SenseVoiceSmall-Q8_0.gguf' (requested Auto, gpu_device 0, bound backend 'MTL0', supports_streaming=false, supports_translate=false, supports_language_detect=true)
+1157|[2026-07-29][01:04:33][handy_app_lib::managers::audio][DEBUG] Recording started for binding transcribe
+1158|[2026-07-29][01:04:33][handy_app_lib::actions][DEBUG] Recording started in 186.181291ms
+1175|[2026-07-29][02:24:21][handy_app_lib::actions][DEBUG] Starting async transcription task for binding: transcribe
+1177|[2026-07-29][02:24:21][handy_app_lib::actions][DEBUG] Recording stopped and samples retrieved in 39.222ms, sample count: 28929120
+1178|[2026-07-29][02:24:21][handy_app_lib::managers::transcription][DEBUG] Audio vector length: 28929120
+1181|[2026-07-29][02:24:21][transcribe_cpp][WARN] sensevoice run: audio is 1808.1 s, beyond the ~30 s window this model was trained on; accuracy may degrade and memory use grows quadratically. Split long audio into <=30 s segments (e.g. with VAD). See transcribe_capabilities.max_audio_ms.
+1215|[2026-07-29][02:27:34][handy_app_lib::managers::transcription][INFO] Transcription completed in 192.22s for 1808.07s of audio (9.41x real-time)
+1216|[2026-07-29][02:27:34][handy_app_lib::managers::transcription][INFO] Transcription result: 是烟草标标标公司司国家项目准项目关首定事业国家下面面的营构致首先第一个是经营范围经营范围是一前企就是任何一个标业理体系这标准规范制烟企业相致相妥协的个说性的工业商这行标准一致相应的作协商一致结首先我们要明确标准使用的群体比说这个行业标准企业标准企业内这个使用的情位规位的建在这工使在个体使用标准复使用是标准制定标准复使文复使用的文件工程准制定相关的生产经营场监全生产职业标准保生产量文件活技术经验综合导复用也是文施个质标准的制标用标活制定标准制定标个的用标制标准法导向标准国标啊对这个强标经这样一个要当国标的个个基术工用方案术制制行业要同时者规工关制性国制性国家标准步试方法这这个这个质量监督场景个也是全生首先用没行业... [truncated, total_line_len=604]
+1217|[2026-07-29][02:27:34][handy_app_lib::actions][DEBUG] Transcription completed in 192.230883667s: '是烟草标标标公司司国家项目准项目关首定事业国家下面面的营构致首先第一个是经营范围经营范围是一前企就是任何一个标业理体系这标准规范制烟企业相致相妥协的个说性的工业商这行标准一致相应的作协商一致结首先我们要明确标准使用的群体比说这个行业标准企业标准企业内这个使用的情位规位的建在这工使在个体使用标准复使用是标准制定标准复使文复使用的文件工程准制定相关的生产经营场监全生产职业标准保生产量文件活技术经验综合导复用也是文施个质标准的制标用标活制定标准制定标个的用标制标准法导向标准国标啊对这个强标经这样一个要当国标的个个基术工用方案术制制行业要同时者规工关制性国制性国家标准步试方法这这个这个质量监督场景个也是全生首先用没行业层面标首特准准但标三方有关构企业系工构基准系管系文件这个是制经典作按这个标必须督规范规文面我这个要一致个规文件的标应序性的一个性术法这个标的规定啊这个个最高验规定规制性标基术制个产品实认为这是初这个标准化方验标信息化标首次业烟产入定行个发厂工烟物统烟烟质标单基术标准信息烟制息程制目基标制制制标准为这个烟草草制制基这分试规的经规相关烟制相本成烟草中标针检这些标准应这个当时是不符合有项这个是一项这个是新订的'
+1219|[2026-07-29][02:27:34][handy_app_lib::actions][DEBUG] OpenCC translation completed. Input length: 1536, Output length: 1536
+1220|[2026-07-29][02:27:34][handy_app_lib::managers::history][DEBUG] Saved history entry with id 7
+1240|[2026-07-29][02:31:12][handy_app_lib::managers::transcription][DEBUG] Audio vector length: 28929120
+1251|[2026-07-29][02:31:12][handy_app_lib::managers::transcription][INFO] Loaded whisper model 'handy-computer/SenseVoiceSmall-gguf/SenseVoiceSmall-Q8_0.gguf' (requested Auto, gpu_device 0, bound backend 'MTL0', supports_streaming=false, supports_translate=false, supports_language_detect=true)
+1255|[2026-07-29][02:31:12][transcribe_cpp][WARN] sensevoice run: audio is 1808.1 s, beyond the ~30 s window this model was trained on; accuracy may degrade and memory use grows quadratically. Split long audio into <=30 s segments (e.g. with VAD). See transcribe_capabilities.max_audio_ms.
+1256|[2026-07-29][02:34:43][handy_app_lib::managers::transcription][INFO] Transcription completed in 210.96s for 1808.07s of audio (8.57x real-time)
+1257|[2026-07-29][02:34:43][handy_app_lib::managers::transcription][INFO] Transcription result: 是烟草标标标公司司国家项目准项目关首定事业国家下面面的营制构致首先第一个是经营范围经营范围是一前企就是任何一个标业理体系这标准规范制烟企业相制相妥协的个说性的工业商这行标准一致相应的作协商一致结首先我们要明确标准使用的群体比说这个行业标准企业标准企业内这个使用的情位规位的建在这工使在个体使用标准复使用是标准制定标准复使文复使用的文件工程准制定相关的生产经营场监全生产职业标准保生产量文件活技术经验综合导复用也是文施个质标准的制标用标活制定标准制定标个的用标制标准法导向标准国标啊对这个强标经这样一个要当国标的个个基术工用方案术制制行业要同时者规工关制性国制性国家标准步试方法这这个这个质量监督场景个也是全生首先用没行... [truncated, total_line_len=610]
+1259|[2026-07-29][02:34:43][handy_app_lib::actions][DEBUG] OpenCC translation completed. Input length: 1554, Output length: 1554
+1272|[2026-07-29][02:36:15][handy_app_lib::managers::transcription][INFO] Loaded whisper model 'handy-computer/Qwen3-ASR-0.6B-gguf/Qwen3-ASR-0.6B-Q8_0.gguf' (requested Auto, gpu_device 0, bound backend 'MTL0', supports_streaming=false, supports_translate=false, supports_language_detect=true)
