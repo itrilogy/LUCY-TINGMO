@@ -4,8 +4,8 @@
 
 # 听默 · Tingmo
 
-**听而有迹 · 默而成文**  
-*Listen in silence · leave it in words*
+**谛听万籁，默化成文**  
+*Listening in silence, transcribing without friction.*
 
 一款**本地模型驱动**的桌面语音成文应用
 
@@ -20,7 +20,7 @@
 
 | 显示名 | 包 / 二进制 | 版本 | 定位 |
 | :---: | :---: | :---: | :---: |
-| **听·默** / 听默 | `听默.app` · `tingmo` | **0.9.4** | 实验室实验分支 |
+| **听默 · Tingmo** | `Tingmo.app` · `tingmo` | **0.9.4** | 实验室实验分支 |
 
 </div>
 

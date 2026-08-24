@@ -1,9 +1,9 @@
 {
   "app": {
-    "name": "Ting·mo",
-    "slogan": "Listen in silence · leave it in words",
-    "sloganShort": "Listen in silence · leave it in words",
-    "tagline": "A local-model-driven speech-to-text app"
+    "name": "Tingmo",
+    "slogan": "Listening in silence, transcribing without friction.",
+    "sloganShort": "Listening in silence, transcribing without friction.",
+    "tagline": "A local speech-to-text app that listens quietly and writes at the cursor."
   },
   "developer": {
     "name": "LUXI Joint Innovation Lab",

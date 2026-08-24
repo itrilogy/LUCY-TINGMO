@@ -1,9 +1,9 @@
 {
   "app": {
-    "name": "听·默",
-    "slogan": "听而有迹·默而成文",
-    "sloganShort": "听而有迹·默而成文",
-    "tagline": "一款本地模型驱动的语音成文应用"
+    "name": "听默 · Tingmo",
+    "slogan": "谛听万籁，默化成文",
+    "sloganShort": "谛听万籁，默化成文",
+    "tagline": "倾听于声，成字于默。本地语音捕捉，静默转写并融入光标心流。"
   },
   "developer": {
     "name": "鹿溪联合创新实验室",

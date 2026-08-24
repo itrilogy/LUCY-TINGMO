@@ -162,9 +162,9 @@ pub fn tray_tooltip() -> String {
 fn version_label() -> String {
     // Display name for tray version row + tooltip (not the Cargo package id).
     if cfg!(debug_assertions) {
-        format!("听默 v{} (Dev)", env!("CARGO_PKG_VERSION"))
+        format!("听默 · Tingmo v{} (Dev)", env!("CARGO_PKG_VERSION"))
     } else {
-        format!("听默 v{}", env!("CARGO_PKG_VERSION"))
+        format!("听默 · Tingmo v{}", env!("CARGO_PKG_VERSION"))
     }
 }
 
