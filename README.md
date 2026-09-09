@@ -1,38 +1,47 @@
 <div align="center">
+  <img src="docs/assets/tingmo-app-icon-256.png" width="64" height="64" alt="听默 · Tingmo 产品标" />
+  &nbsp;&nbsp;
+  <img src="docs/assets/luxi-lab-logo.png" width="64" height="64" alt="鹿溪联合创新实验室 LUXI LAB" />
+</div>
 
-<img src="docs/assets/tingmo-app-icon-256.png" alt="听默应用图标" width="128" height="128" />
+<h1 align="center">听默 · Tingmo</h1>
 
-# 听默 · Tingmo
+<p align="center">
+  <strong>谛听万籁，默化成文</strong><br/>
+  <em>Listening in silence, transcribing without friction.</em>
+</p>
 
-**谛听万籁，默化成文**  
-*Listening in silence, transcribing without friction.*
+<p align="center">
+  <img src="https://img.shields.io/badge/Matrix-知行%C2%B7三动-0D5E42" alt="matrix" />
+  <img src="https://img.shields.io/badge/Product-听默%20Tingmo-0D5E42" alt="product" />
+  <img src="https://img.shields.io/badge/Lab-鹿溪联合创新实验室-047538" alt="lab" />
+  <img src="https://img.shields.io/badge/Based%20on-Handy-6366f1" alt="upstream" />
+  <img src="https://img.shields.io/badge/Stack-Tauri%202%20%7C%20React%20%7C%20Rust-blue" alt="stack" />
+  <img src="https://img.shields.io/badge/Version-v0.9.4-f1c40f" alt="version" />
+</p>
 
-一款**本地模型驱动**的桌面语音成文应用
+<p align="center">
+  <b>鹿溪联合创新实验室</b>（LUXI Joint Innovation Lab）出品<br/>
+  仓库：<a href="https://github.com/itrilogy/LUCY-TINGMO">itrilogy/LUCY-TINGMO</a>
+</p>
 
-<br/>
+---
 
-<img src="docs/assets/luxi-lab-logo.png" alt="鹿溪联合创新实验室" width="160" height="160" />
-
-**鹿溪联合创新实验室** · LUXI Joint Innovation Lab  
-*林深见鹿，源启清溪 · Deep Insights, Evolutionary Origin.*
-
-<br/>
+一款**本地模型驱动**的桌面语音成文应用。
 
 | 显示名 | 包 / 二进制 | 版本 | 定位 |
 | :---: | :---: | :---: | :---: |
 | **听默 · Tingmo** | `Tingmo.app` · `tingmo` | **0.9.4** | 实验室实验分支 |
 
-</div>
-
 ---
 
-## 品牌标识
+## 🎨 品牌标识
 
 | 标识 | 预览 | 说明 | 源文件 |
 | :---: | :---: | --- | --- |
-| **应用主 Logo** | <img src="docs/assets/tingmo-app-icon-256.png" width="72" alt="听默" /> | 鹿溪绿圆角底板 + 声纹弧 / 溪流意象 / 源启点；用于 Dock、安装包、侧栏 | [`docs/assets/tingmo-app-icon.svg`](docs/assets/tingmo-app-icon.svg) · [`src/assets/tingmo-app-icon.svg`](src/assets/tingmo-app-icon.svg) |
-| **实验室 Logo** | <img src="docs/assets/luxi-lab-logo.png" width="72" alt="鹿溪实验室" /> | 鹿溪写实鹿标 + 实验室视觉；用于关于页、文档页眉 | [`docs/assets/luxi-lab.svg`](docs/assets/luxi-lab.svg) · [`src/assets/luxi-lab.svg`](src/assets/luxi-lab.svg) |
-| 实验室字锁（横版） | <img src="docs/assets/luxi-lab-lockup.png" height="36" alt="鹿溪字锁" /> | 标 +「鹿溪联合创新实验室」 | [`docs/assets/luxi-lab-lockup.svg`](docs/assets/luxi-lab-lockup.svg) |
+| **产品方标** | <img src="docs/assets/tingmo-app-icon-256.png" width="32" alt="听默" /> | 鹿溪绿圆角底板 + 声纹弧 / 溪流意象 / 源启点；用于 Dock、安装包、侧栏 | `docs/assets/tingmo-app-icon.svg` · `src/assets/tingmo-app-icon.svg` |
+| **实验室主标** | <img src="docs/assets/luxi-lab-logo.png" width="32" alt="鹿溪实验室" /> | 鹿溪写实鹿标 + 实验室视觉；用于关于页、文档页眉 | `docs/assets/luxi-lab.svg` · `src/assets/luxi-lab.svg` |
+| 实验室字锁（横版） | <img src="docs/assets/luxi-lab-lockup.png" height="24" alt="鹿溪字锁" /> | 标 +「鹿溪联合创新实验室」 | `docs/assets/luxi-lab-lockup.svg` |
 
 **色板（LUXI CI）**
 
@@ -41,7 +50,7 @@
 | 鹿溪绿 | `#0D5E42` | 主色 / 图标底板 / 强调 |
 | 源启白 | `#F5F7FA` | 浅色背景 / 浅色文案底 |
 | 进化蓝 | `#00D2FF` | 高光 / 波形点缀 |
-| 深林底 | `#121A17` | 深色主题背景 |
+| 标题金 | `#F1C40F` | 落点 / 显著信号 |
 
 更多资产与再生步骤：[`代码研究/13-品牌LOGO资产与图标操作说明.md`](代码研究/13-品牌LOGO资产与图标操作说明.md) · [`docs/assets/`](docs/assets/)
 
@@ -104,7 +113,7 @@
 
 ---
 
-## 本地开发
+## 🔧 本地开发
 
 **环境：** [Rust](https://rustup.rs/)（stable）· [Bun](https://bun.sh/)
 
@@ -153,7 +162,7 @@ macOS：
 
 ---
 
-## 架构（简）
+## 🏗 架构（简）
 
 | 层 | 技术 |
 | --- | --- |
@@ -193,3 +202,12 @@ macOS：
 基于开源 Handy 的鹿溪联合创新实验室实验构建
 林深见鹿，源启清溪 — 鹿溪联合创新实验室
 ```
+
+---
+
+<div align="center">
+  <img src="docs/assets/luxi-lab-logo.png" width="48" height="48" alt="LUXI LAB" />
+  <p><strong>听默 · Tingmo</strong> · 谛听万籁，默化成文</p>
+  <p>© 鹿溪联合创新实验室 · LUXI Joint Innovation Lab</p>
+  <p><em>林深见鹿，源启清溪 · Deep Insights, Evolutionary Origin.</em></p>
+</div>
